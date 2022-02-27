@@ -14,7 +14,7 @@ public class SpiderAI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        target = GameObject.Find("Charecter").transform;
+        target = GameObject.Find("Player").transform;
         agent = GetComponent<NavMeshAgent>();
     }
 
