@@ -5,8 +5,9 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    bool canRepairWall;
+   public bool canRepairWall;
     float rebuiltTimer = 0;
+    public Text ui;
     // Start is called before the first frame update
     void Start()
     {
@@ -30,7 +31,7 @@ public class Player : MonoBehaviour
         if (collide.gameObject.tag == "boardSpawner")
         {
             canRepairWall = false;
-            collide.GetComponent<UI>().PromptText.text = "";
+            ui.text = "";
         }
     }
 
@@ -41,11 +42,11 @@ public class Player : MonoBehaviour
             rebuiltTimer += Time.deltaTime;
             if (canRepairWall)
             {
-                UI ui = collide.GetComponent<UI>();
-                ui.PromptText.text = "Press F to repair barrier";
-                if (Input.GetKey("F") && rebuiltTimer > 1.0f)
+                
+                ui.text = "Press F to repair barrier";
+                if (Input.GetKey(KeyCode.F) && rebuiltTimer > 1.0f)
                 {
-                    collide.SendMessage("AddBoard", SendMessageOptions.RequireReceiver);
+                    collide.SendMessage("addBarricade", SendMessageOptions.RequireReceiver);
                     rebuiltTimer = 0;
                 }
             }

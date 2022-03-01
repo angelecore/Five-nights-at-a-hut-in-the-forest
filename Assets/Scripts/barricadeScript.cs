@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class barricadeScript : MonoBehaviour
 {
-    public int boards, previuosBoards;
+    public int boards;
     public GameObject[] board;
     // Start is called before the first frame update
     void Start()
@@ -19,7 +19,7 @@ public class barricadeScript : MonoBehaviour
     }
     void addBarricade()
     {
-        if(boards <3)
+        if(boards < 3)
         {
             board[boards].SetActive(true);
             boards += 1;
