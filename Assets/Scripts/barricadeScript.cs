@@ -5,11 +5,14 @@ using UnityEngine;
 public class barricadeScript : MonoBehaviour
 {
     public int boards;
+
+    
     public GameObject[] board;
+    public Player player;
     // Start is called before the first frame update
     void Start()
     {
-        
+        // player = GetComponent<Player>();
     }
 
     // Update is called once per frame
@@ -19,10 +22,11 @@ public class barricadeScript : MonoBehaviour
     }
     void addBarricade()
     {
-        if(boards < 3)
+        if(boards < 3 && player.boardchech())
         {
             board[boards].SetActive(true);
             boards += 1;
+            player.removebaricadecount();
         }
     }
     void removeBarricade()

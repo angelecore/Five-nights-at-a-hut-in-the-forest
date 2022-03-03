@@ -7,4 +7,5 @@ public class UI : MonoBehaviour
     //UI
     [Header("UI")]
     public Text PromptText;
+    public Text boardcountUI;
 }

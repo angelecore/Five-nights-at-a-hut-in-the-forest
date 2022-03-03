@@ -10,6 +10,8 @@ public class SpiderAI : MonoBehaviour
     Transform target;
     NavMeshAgent agent;
 
+    public Player player;
+
 
     // Start is called before the first frame update
     void Start()
@@ -31,6 +33,9 @@ public class SpiderAI : MonoBehaviour
             {
                 transform.LookAt(target);
                 //attack
+
+                player.StopGame();
+
             }
         }
     }

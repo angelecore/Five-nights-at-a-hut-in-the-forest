@@ -7,16 +7,27 @@ public class Player : MonoBehaviour
 {
    public bool canRepairWall;
     float rebuiltTimer = 0;
+    public int boardcount = 10;
     public Text ui;
+    public Text boardsc;
+    public Text gameoverscreen;
+    public playerMovement move;
+    // public Text boardcountUI;
     // Start is called before the first frame update
     void Start()
     {
-
+        boardsc.text = $"boards: {boardcount}";
     }
 
     // Update is called once per frame
     void Update()
     {
+        
+    }
+    public void StopGame()
+    {
+        move.enabled = false;
+        gameoverscreen.text = $" Game over ";
 
     }
     void OnTriggerEnter(Collider collide)
@@ -34,6 +45,18 @@ public class Player : MonoBehaviour
             ui.text = "";
         }
     }
+
+    public void removebaricadecount()
+    {
+        boardcount--;
+        boardsc.text = $"boards: {boardcount}";
+    }
+
+    public bool boardchech()
+    {
+        return boardcount > 0;
+    }
+
 
     void OnTriggerStay(Collider collide)
     {
