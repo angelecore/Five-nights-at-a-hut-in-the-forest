@@ -6,6 +6,7 @@ TagManager:
   tags:
   - boardSpawner
   - UI
+  - PhaseSwitcher
   layers:
   - Default
   - TransparentFX
