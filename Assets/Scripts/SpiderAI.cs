@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
+[RequireComponent(typeof(Rigidbody))]
 public class SpiderAI : MonoBehaviour
 {
     public delegate void SpiderKilled();
@@ -12,11 +13,20 @@ public class SpiderAI : MonoBehaviour
     public float roamTargetDistance = 3f;
     Vector3 roamPoint;
     bool RoamPointSet = false;
+    
 
     Transform target;
     NavMeshAgent agent;
 
     public Player player;
+
+    private float AttackCooldownTime = 2;
+    private float NextAttackTime = 0;
+    private float DamageValue = 0.5f;
+
+    private float health = 2f;
+
+    private float knockbackTime = 2f;
 
     // Start is called before the first frame update
     void Start()
@@ -24,6 +34,8 @@ public class SpiderAI : MonoBehaviour
         target = GameObject.Find("Player").transform;
         agent = GetComponent<NavMeshAgent>();
     }
+
+    
 
     // Update is called once per frame
     void Update()
@@ -43,6 +55,28 @@ public class SpiderAI : MonoBehaviour
             AttackPlayer();
         }
     }
+
+    public void TakeDamage(float damage, float knockback)
+    {
+        health -= damage;
+        if (health <= 0)
+        {
+            Die();
+        }
+        else
+            StartCoroutine(KnockBackCo(gameObject.GetComponent<Rigidbody>()));
+    }
+
+    private IEnumerator KnockBackCo(Rigidbody rb)
+    {
+        if (rb != null)
+        {
+            yield return new WaitForSeconds(knockbackTime);
+            rb.velocity = Vector3.zero;
+            rb.isKinematic = true;
+        }
+    }
+
     void Roam()
     {
         if (!RoamPointSet)
@@ -76,15 +110,23 @@ public class SpiderAI : MonoBehaviour
 
     void AttackPlayer()
     {
+        
         transform.LookAt(target);
+
         //---enemy attacks---
+        if(Time.time > NextAttackTime)
+        {
+            player.TakeDamage(DamageValue);
+            NextAttackTime = Time.time + AttackCooldownTime;
+        }
 
         //Temporarily here for testing respawning
         //Enemy shouldn't die when it attacks
-        Die();
+        //Die();
 
         //player.StopGame();
     }
+
 
     void Die()
     {
@@ -100,4 +142,6 @@ public class SpiderAI : MonoBehaviour
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, lookRadius);
     }
+
+    
 }

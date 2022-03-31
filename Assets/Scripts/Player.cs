@@ -12,17 +12,35 @@ public class Player : MonoBehaviour
     public Text boardsc;
     public Text gameoverscreen;
     public playerMovement move;
+
+    
+    public int maxHealth = 10;
+    public float currentHealth;
+    public HealthBar healthBar;
     // public Text boardcountUI;
     // Start is called before the first frame update
     void Start()
     {
         boardsc.text = $"boards: {boardcount}";
+        currentHealth = maxHealth;
+        healthBar.SetMaxHP(maxHealth);
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+
+    public void TakeDamage(float damage)
+    {
+        currentHealth -= damage;
+
+        healthBar.SetHealth(currentHealth);
+        if(currentHealth <= 0)
+        {
+            StopGame();
+        }
     }
     public void StopGame()
     {
