@@ -41,12 +41,14 @@ public class PlayerCombat : MonoBehaviour
         foreach (Collider c in enemies)
         {
             Rigidbody enemy = c.GetComponent<Rigidbody>();
-            enemy.isKinematic = false;
-            Vector3 difference = enemy.transform.forward + Attackpoint.forward;
-            difference = difference.normalized * 4;
-            enemy.AddForce(difference, ForceMode.Impulse);
+            //enemy.isKinematic = false;
+            //Vector3 difference = enemy.transform.forward + Attackpoint.forward;
+            //difference = difference.normalized * 4;
+            //enemy.AddForce(difference, ForceMode.Impulse);
+            //c.GetComponent<SpiderAI>().GoAway();
             //StartCoroutine(KnockBackCo(enemy));
             c.GetComponent<SpiderAI>().TakeDamage(damagevalue, 10f);
+            c.GetComponent<SpiderAI>().setcounterto0();
         }
     }
 

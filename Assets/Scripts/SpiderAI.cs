@@ -26,7 +26,9 @@ public class SpiderAI : MonoBehaviour
 
     private float health = 2f;
 
-    private float knockbackTime = 2f;
+    private float knockbackTime = 1000f;
+
+    private float counter = 1000f;
 
     // Start is called before the first frame update
     void Start()
@@ -41,19 +43,26 @@ public class SpiderAI : MonoBehaviour
     void Update()
     {
         float distanceToPlayer = Vector3.Distance(target.position, transform.position);
-
-        if (distanceToPlayer >= lookRadius)
+        if (counter >= knockbackTime)
         {
-            Roam();
+            if (distanceToPlayer >= lookRadius)
+            {
+                Roam();
+            }
+            if (distanceToPlayer <= lookRadius && distanceToPlayer >= agent.stoppingDistance)
+            {
+                ChasePlayer();
+            }
+            if (distanceToPlayer <= agent.stoppingDistance)
+            {
+                AttackPlayer();
+            }
         }
-        if (distanceToPlayer <= lookRadius && distanceToPlayer >= agent.stoppingDistance)
+        else
         {
-            ChasePlayer();
+            GoAway();
         }
-        if (distanceToPlayer <= agent.stoppingDistance)
-        {
-            AttackPlayer();
-        }
+        counter += 1;
     }
 
     public void TakeDamage(float damage, float knockback)
@@ -63,18 +72,25 @@ public class SpiderAI : MonoBehaviour
         {
             Die();
         }
-        else
-            StartCoroutine(KnockBackCo(gameObject.GetComponent<Rigidbody>()));
+        //else
+            //StartCoroutine(KnockBackCo(gameObject.GetComponent<Rigidbody>()));
     }
 
     private IEnumerator KnockBackCo(Rigidbody rb)
     {
         if (rb != null)
         {
+            GoAway();
             yield return new WaitForSeconds(knockbackTime);
             rb.velocity = Vector3.zero;
             rb.isKinematic = true;
+            setcounterto0();
         }
+    }
+
+    public void setcounterto0()
+    {
+        counter = 0;
     }
 
     void Roam()
@@ -106,6 +122,15 @@ public class SpiderAI : MonoBehaviour
     void ChasePlayer()
     {
         agent.SetDestination(target.position);
+    }
+
+    public void GoAway()
+    {
+        Vector3 dirtoPlayer = transform.position - target.transform.position;
+
+        Vector3 newPos = transform.position + dirtoPlayer;
+
+        agent.SetDestination(newPos);
     }
 
     void AttackPlayer()

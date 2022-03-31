@@ -10992,7 +10992,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   damagevalue: 1
-  knockbackTime: 2
+  knockbackTime: 10
 --- !u!1 &662554428
 GameObject:
   m_ObjectHideFlags: 0
