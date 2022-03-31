@@ -8,6 +8,11 @@ public class TreeEntAI : MonoBehaviour
     Transform target;
     NavMeshAgent agent;
 
+    public PhaseSwitchTrigger phaseSwitch;
+
+    private bool ImActive = false;
+    private bool ActivationInitiated = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -21,14 +26,38 @@ public class TreeEntAI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float distanceToTarget = Vector3.Distance(target.position, transform.position);
-
-        agent.SetDestination(target.position);
-
-        if (distanceToTarget <= agent.stoppingDistance)
+        if (phaseSwitch.IsItNight)
         {
-            //attack the barricade
+            if (ImActive)
+            {
+                float distanceToTarget = Vector3.Distance(target.position, transform.position);
+
+                agent.SetDestination(target.position);
+
+                if (distanceToTarget <= agent.stoppingDistance)
+                {
+                    //attack the barricade
+                }
+            }
+            else if (!ActivationInitiated)
+            {
+                ActivationInitiated = true;
+                StartCoroutine(DelayedActivate());
+            }
         }
+        else
+        {
+            agent.SetDestination(transform.position);
+        }
+    }
+
+    IEnumerator DelayedActivate()
+    {
+        //random spawn delay between 3 - 15 seconds
+        int delay = Mathf.RoundToInt(Random.Range(1f, 15f));
+        yield return new WaitForSeconds(delay);
+
+        ImActive = true;
     }
 
     private Transform GetTarget(out GameObject targetBoardSpawner)

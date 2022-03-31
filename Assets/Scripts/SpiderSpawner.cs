@@ -6,7 +6,7 @@ public class SpiderSpawner : MonoBehaviour
 {
     public Transform[] SpawnPoints;
     public GameObject SpiderPrefab;
-    private int MaxSpiderCount = 3;
+    public int MaxSpiderCount = 3;
     private int CurrentSpiderCount = 0;
 
     //PhaseSwitcher initialises this script so don't need Start()

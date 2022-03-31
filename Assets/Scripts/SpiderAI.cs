@@ -12,13 +12,11 @@ public class SpiderAI : MonoBehaviour
     public float roamTargetDistance = 3f;
     Vector3 roamPoint;
     bool RoamPointSet = false;
-    
 
     Transform target;
     NavMeshAgent agent;
 
     public Player player;
-
 
     // Start is called before the first frame update
     void Start()

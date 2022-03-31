@@ -5297,6 +5297,36 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.0058870423, y: 0.0039999993, z: 0.029345}
   m_Center: {x: -0.0009435213, y: 0.0000000018626451, z: 0}
+--- !u!1 &336452393
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 336452394}
+  m_Layer: 0
+  m_Name: TreeEntSpawnPt (2)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &336452394
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 336452393}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -65, y: 1.29, z: -4.15}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2109550551}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &340806651
 GameObject:
   m_ObjectHideFlags: 0
@@ -10714,6 +10744,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PStag: PhaseSwitcher
+  IsItNight: 0
   spiderSpawner: {fileID: 2109550550}
 --- !u!54 &637167222
 Rigidbody:
@@ -11476,6 +11507,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4c19c9559b974c468ebc7cbab94adee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  phaseSwitch: {fileID: 637167221}
 --- !u!1 &767541001
 GameObject:
   m_ObjectHideFlags: 0
@@ -28509,6 +28541,36 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!1 &1864186196
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1864186197}
+  m_Layer: 0
+  m_Name: TreeEntSpawnPt (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1864186197
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1864186196}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -22.56, y: 1.29, z: -42.6}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2109550551}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1869666277
 GameObject:
   m_ObjectHideFlags: 0
@@ -33444,6 +33506,36 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
+--- !u!1 &1879462787
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1879462788}
+  m_Layer: 0
+  m_Name: TreeEntSpawnPt (3)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1879462788
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1879462787}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -28.1, y: 1.29, z: 22.7}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2109550551}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1879784850 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3332428708606299005, guid: ed2207e1775826a4b9644b3dd84b5a9b, type: 3}
@@ -33909,6 +34001,36 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
+--- !u!1 &2100300725
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2100300726}
+  m_Layer: 0
+  m_Name: TreeEntSpawnPt
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2100300726
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2100300725}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 5.5, y: 1.29, z: -7.15}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2109550551}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2109550549
 GameObject:
   m_ObjectHideFlags: 0
@@ -33919,6 +34041,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2109550551}
   - component: {fileID: 2109550550}
+  - component: {fileID: 2109550552}
   m_Layer: 0
   m_Name: EnemyManager
   m_TagString: Untagged
@@ -33943,6 +34066,7 @@ MonoBehaviour:
   - {fileID: 1955344057}
   - {fileID: 152774451}
   SpiderPrefab: {fileID: 770541570}
+  MaxSpiderCount: 3
 --- !u!4 &2109550551
 Transform:
   m_ObjectHideFlags: 0
@@ -33957,9 +34081,33 @@ Transform:
   - {fileID: 662554429}
   - {fileID: 1955344057}
   - {fileID: 152774451}
+  - {fileID: 2100300726}
+  - {fileID: 1864186197}
+  - {fileID: 336452394}
+  - {fileID: 1879462788}
   m_Father: {fileID: 0}
   m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2109550552
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2109550549}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a64a3cd42d8eb34e9ff3535e2d36342, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SpawnPoints:
+  - {fileID: 2100300726}
+  - {fileID: 1864186197}
+  - {fileID: 336452394}
+  - {fileID: 1879462788}
+  TreeEntPrefab: {fileID: 756240058}
+  SpawnDeviationDistance: 3
+  SapwnAmount: 6
 --- !u!1 &2110543921 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8263071719956720979, guid: ed2207e1775826a4b9644b3dd84b5a9b, type: 3}
