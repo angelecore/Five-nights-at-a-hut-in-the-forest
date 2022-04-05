@@ -65,7 +65,7 @@ public class SpiderAI : MonoBehaviour
         counter += 1;
     }
 
-    public void TakeDamage(float damage, float knockback)
+    public void TakeDamage(float damage)
     {
         health -= damage;
         if (health <= 0)

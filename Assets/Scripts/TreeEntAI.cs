@@ -13,6 +13,13 @@ public class TreeEntAI : MonoBehaviour
     private bool ImActive = false;
     private bool ActivationInitiated = false;
 
+    // how many times it was hit currently
+    private int health = 3;
+    private int maxHealth = 3;
+    // stun duration
+    private int stunduration = 1000;
+    // how long it is studdent for currently
+    private int currentstunduration = 0;
     // Start is called before the first frame update
     void Start()
     {
@@ -26,31 +33,50 @@ public class TreeEntAI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (phaseSwitch.IsItNight)
+        if (health > 0)
         {
-            if (ImActive)
+            if (phaseSwitch.IsItNight)
             {
-                float distanceToTarget = Vector3.Distance(target.position, transform.position);
-
-                agent.SetDestination(target.position);
-
-                if (distanceToTarget <= agent.stoppingDistance)
+                if (ImActive)
                 {
-                    //attack the barricade
+                    float distanceToTarget = Vector3.Distance(target.position, transform.position);
+
+                    agent.SetDestination(target.position);
+
+                    if (distanceToTarget <= agent.stoppingDistance)
+                    {
+                        //attack the barricade
+                    }
+                }
+                else if (!ActivationInitiated)
+                {
+                    ActivationInitiated = true;
+                    StartCoroutine(DelayedActivate());
                 }
             }
-            else if (!ActivationInitiated)
+            else
             {
-                ActivationInitiated = true;
-                StartCoroutine(DelayedActivate());
+                agent.SetDestination(transform.position);
             }
         }
         else
         {
-            agent.SetDestination(transform.position);
+            if(currentstunduration >= stunduration)
+            {
+                health = maxHealth;
+            }
+            currentstunduration++;
         }
     }
 
+    public void TakeDamage(int damage)
+    {
+        health -= damage;
+        if (health <= 0)
+        {
+            currentstunduration = 0;
+        }
+    }
     IEnumerator DelayedActivate()
     {
         //random spawn delay between 3 - 15 seconds

@@ -9,7 +9,8 @@ public class PlayerCombat : MonoBehaviour
 
     public Transform Attackpoint;
 
-    public LayerMask enemylayer;
+    public LayerMask spiderlayer;
+    public LayerMask EntLayer;
     public float damagevalue = 1;
     private float AttackCooldownTime = 1;
     private float NextAttackTime = 0;
@@ -33,22 +34,24 @@ public class PlayerCombat : MonoBehaviour
     void Attack()
     {
         // enemy detection
-        Collider[] enemies = Physics.OverlapSphere(Attackpoint.position, AttackRange, enemylayer);
-
-        //damage
-        //Debug.Log("hit");
-        //Vector3 direction = Attackpoint.localPosition;
-        foreach (Collider c in enemies)
+        Collider[] spiders = Physics.OverlapSphere(Attackpoint.position, AttackRange, spiderlayer);
+        foreach (Collider c in spiders)
         {
-            Rigidbody enemy = c.GetComponent<Rigidbody>();
+            /*DeadCode
+            //Rigidbody enemy = c.GetComponent<Rigidbody>();
             //enemy.isKinematic = false;
             //Vector3 difference = enemy.transform.forward + Attackpoint.forward;
             //difference = difference.normalized * 4;
             //enemy.AddForce(difference, ForceMode.Impulse);
             //c.GetComponent<SpiderAI>().GoAway();
-            //StartCoroutine(KnockBackCo(enemy));
-            c.GetComponent<SpiderAI>().TakeDamage(damagevalue, 10f);
-            c.GetComponent<SpiderAI>().setcounterto0();
+            //StartCoroutine(KnockBackCo(enemy));*/
+                c.GetComponent<SpiderAI>().TakeDamage(damagevalue);
+                c.GetComponent<SpiderAI>().setcounterto0();
+        }
+        Collider[] Ents = Physics.OverlapSphere(Attackpoint.position, AttackRange, EntLayer);
+        foreach (Collider c in Ents)
+        {
+            c.GetComponent<TreeEntAI>().TakeDamage(1);
         }
     }
 
