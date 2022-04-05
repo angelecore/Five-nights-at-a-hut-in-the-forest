@@ -5812,6 +5812,7 @@ MonoBehaviour:
   - {fileID: 1722834868}
   - {fileID: 340806651}
   player: {fileID: 646985845}
+  hp: 0
 --- !u!64 &523484089
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -11712,6 +11713,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   phaseSwitch: {fileID: 637167221}
+  attackTimer: 0
+  distanceToTarget: 0
+  test: 0
+  attack: 0
 --- !u!1 &767541001
 GameObject:
   m_ObjectHideFlags: 0
@@ -12153,6 +12158,7 @@ MonoBehaviour:
   - {fileID: 771827521}
   - {fileID: 1584992357}
   player: {fileID: 646985845}
+  hp: 0
 --- !u!64 &842403943
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -12487,6 +12493,7 @@ MonoBehaviour:
   - {fileID: 676125288}
   - {fileID: 797795595}
   player: {fileID: 646985845}
+  hp: 0
 --- !u!64 &1134158257
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -28210,11 +28217,11 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1642468180}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.9999999, y: 1, z: 0.18956766}
-  m_Center: {x: -3.6729456e-12, y: 0.00000005197479, z: -0.094789095}
+  m_Size: {x: 0.9999999, y: 1.6336308, z: 4.4102244}
+  m_Center: {x: 1.3133788e-11, y: -0.3168101, z: 0.6306932}
 --- !u!114 &1642468182
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -28238,6 +28245,7 @@ MonoBehaviour:
   - {fileID: 1869666277}
   - {fileID: 703018022}
   player: {fileID: 646985845}
+  hp: 0
 --- !u!64 &1642468183
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -28246,10 +28254,10 @@ MeshCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1642468180}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 4
-  m_Convex: 1
+  m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!23 &1642468184
@@ -28521,6 +28529,7 @@ MonoBehaviour:
   - {fileID: 1569370219}
   - {fileID: 440353244}
   player: {fileID: 646985845}
+  hp: 0
 --- !u!64 &1794332551
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -34125,6 +34134,7 @@ MonoBehaviour:
   - {fileID: 1576613343}
   - {fileID: 406540982}
   player: {fileID: 646985845}
+  hp: 0
 --- !u!65 &2050962665
 BoxCollider:
   m_ObjectHideFlags: 0

@@ -9,6 +9,10 @@ public class TreeEntAI : MonoBehaviour
     NavMeshAgent agent;
 
     public PhaseSwitchTrigger phaseSwitch;
+    public float attackTimer;
+
+    public float distanceToTarget;
+    public float test;
 
     private bool ImActive = false;
     private bool ActivationInitiated = false;
@@ -17,6 +21,8 @@ public class TreeEntAI : MonoBehaviour
     private int health = 3;
     private int maxHealth = 3;
     private bool stun = false;
+
+    public bool attack = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -36,13 +42,21 @@ public class TreeEntAI : MonoBehaviour
             {
                 if (ImActive)
                 {
-                    float distanceToTarget = Vector3.Distance(target.position, transform.position);
+                    distanceToTarget = Vector3.Distance(target.position, transform.position);
 
                     agent.SetDestination(target.position);
 
-                    if (distanceToTarget <= agent.stoppingDistance)
-                    {
-                        //attack the barricade
+                    test = agent.stoppingDistance;
+
+                    if (distanceToTarget-1 <= agent.stoppingDistance)
+                    {                      
+                            attackTimer -= Time.deltaTime;
+                        if (attackTimer <= 0)
+                        {
+                            attack = true;
+                            attackTimer = 4;
+                        }
+
                     }
                 }
                 else if (!ActivationInitiated)
@@ -62,7 +76,27 @@ public class TreeEntAI : MonoBehaviour
             agent.SetDestination(gameObject.transform.position);
         }
     }
-    
+    void OnTriggerStay(Collider collide)
+    {
+        if (attack == true)
+        {
+            if (collide.gameObject.tag == "boardSpawner")
+            {
+                if (collide.gameObject.GetComponent<Renderer>().enabled)
+                {                   
+                    if (attack)
+                    {
+                        collide.GetComponent<Collider>().SendMessageUpwards("removeBarricade", SendMessageOptions.RequireReceiver);
+                        attack = false;
+                    }
+                }
+                else
+                {
+                    attack = false;
+                }
+            }
+        }
+    }
     public void TakeDamage(int damage)
     {
         health -= damage;

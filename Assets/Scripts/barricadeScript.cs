@@ -9,6 +9,7 @@ public class barricadeScript : MonoBehaviour
     public Animator[] boardAnimation;
     public GameObject[] board;
     public Player player;
+    public int hp =  0;
     // Start is called before the first frame update
     void Start()
     {
@@ -44,15 +45,38 @@ public class barricadeScript : MonoBehaviour
         {
             board[boards].SetActive(true);
             boards += 1;
+            hp += 6;
             player.removebaricadecount();
         }
     }
     void removeBarricade()
     {
-        if (boards > 0)
-        {    
-            boards -= 1;
-            board[boards].SetActive(false);
+        if (boards > 0 &hp !=0)
+        {
+            hp -= 3;
+            if (hp == 12)
+            {
+                boards -= 1;
+                board[boards].SetActive(false);
+
+            }
+            else if (hp == 6)
+            {
+                boards -= 1;
+
+                board[boards].SetActive(false);
+               
+            }
+            else if (hp == 0)
+            {
+                boards -= 1;
+                board[boards].SetActive(false);
+                if (boards == 0)
+                {
+                    GetComponent<Renderer>().enabled = false;
+                }
+            }
+
         }
     }
 }
