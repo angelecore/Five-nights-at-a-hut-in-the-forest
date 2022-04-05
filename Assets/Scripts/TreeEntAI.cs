@@ -16,10 +16,7 @@ public class TreeEntAI : MonoBehaviour
     // how many times it was hit currently
     private int health = 3;
     private int maxHealth = 3;
-    // stun duration
-    private int stunduration = 1000;
-    // how long it is studdent for currently
-    private int currentstunduration = 0;
+    private bool stun = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -33,7 +30,7 @@ public class TreeEntAI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (health > 0)
+        if (stun == false)
         {
             if (phaseSwitch.IsItNight)
             {
@@ -61,21 +58,24 @@ public class TreeEntAI : MonoBehaviour
         }
         else
         {
-            if(currentstunduration >= stunduration)
-            {
-                health = maxHealth;
-            }
-            currentstunduration++;
+            //if stunned stayes in one postion
+            agent.SetDestination(gameObject.transform.position);
         }
     }
-
+    
     public void TakeDamage(int damage)
     {
         health -= damage;
         if (health <= 0)
         {
-            currentstunduration = 0;
+            stun = true;
+            StartCoroutine(Stun());
         }
+    }
+
+    public bool GetStunValue()
+    {
+        return stun;
     }
     IEnumerator DelayedActivate()
     {
@@ -84,6 +84,16 @@ public class TreeEntAI : MonoBehaviour
         yield return new WaitForSeconds(delay);
 
         ImActive = true;
+    }
+
+    IEnumerator Stun()
+    {
+        //random stun duration between 1 - 5 seconds
+        int delay = Mathf.RoundToInt(Random.Range(1f, 5f));
+        yield return new WaitForSeconds(delay);
+        health = maxHealth;
+        stun = false;
+
     }
 
     private Transform GetTarget(out GameObject targetBoardSpawner)

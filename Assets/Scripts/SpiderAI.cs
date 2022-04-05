@@ -26,9 +26,7 @@ public class SpiderAI : MonoBehaviour
 
     private float health = 2f;
 
-    private float knockbackTime = 1000f;
-
-    private float counter = 1000f;
+    private bool run = false;
 
     // Start is called before the first frame update
     void Start()
@@ -43,7 +41,7 @@ public class SpiderAI : MonoBehaviour
     void Update()
     {
         float distanceToPlayer = Vector3.Distance(target.position, transform.position);
-        if (counter >= knockbackTime)
+        if (!run)
         {
             if (distanceToPlayer >= lookRadius)
             {
@@ -62,7 +60,6 @@ public class SpiderAI : MonoBehaviour
         {
             GoAway();
         }
-        counter += 1;
     }
 
     public void TakeDamage(float damage)
@@ -72,11 +69,14 @@ public class SpiderAI : MonoBehaviour
         {
             Die();
         }
-        //else
-            //StartCoroutine(KnockBackCo(gameObject.GetComponent<Rigidbody>()));
+        else 
+        {
+            run = true;
+            StartCoroutine(Run());
+        }
     }
 
-    private IEnumerator KnockBackCo(Rigidbody rb)
+    /*private IEnumerator KnockBackCo(Rigidbody rb)
     {
         if (rb != null)
         {
@@ -86,12 +86,7 @@ public class SpiderAI : MonoBehaviour
             rb.isKinematic = true;
             setcounterto0();
         }
-    }
-
-    public void setcounterto0()
-    {
-        counter = 0;
-    }
+    }*/
 
     void Roam()
     {
@@ -151,7 +146,13 @@ public class SpiderAI : MonoBehaviour
 
         //player.StopGame();
     }
+    IEnumerator Run()
+    {
+        //run for 2 sec
+        yield return new WaitForSeconds(2f);
+        run = false;
 
+    }
 
     void Die()
     {

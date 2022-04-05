@@ -46,12 +46,15 @@ public class PlayerCombat : MonoBehaviour
             //c.GetComponent<SpiderAI>().GoAway();
             //StartCoroutine(KnockBackCo(enemy));*/
                 c.GetComponent<SpiderAI>().TakeDamage(damagevalue);
-                c.GetComponent<SpiderAI>().setcounterto0();
+                //c.GetComponent<SpiderAI>().setcounterto0();
         }
         Collider[] Ents = Physics.OverlapSphere(Attackpoint.position, AttackRange, EntLayer);
         foreach (Collider c in Ents)
         {
-            c.GetComponent<TreeEntAI>().TakeDamage(1);
+            if (!c.GetComponent<TreeEntAI>().GetStunValue())
+            { 
+                c.GetComponent<TreeEntAI>().TakeDamage(1); 
+            }
         }
     }
 
