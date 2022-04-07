@@ -13,10 +13,16 @@ public class Player : MonoBehaviour
     public Text gameoverscreen;
     public playerMovement move;
 
+    public SpiderSpawner SpiderSpawner;
+    public TreeEntSpawner TreeEntSpawner;
     
     public int maxHealth = 10;
     public float currentHealth;
     public HealthBar healthBar;
+    private int SpiderCount;
+    private int TreeEntCount;
+
+    public Text EnemyCount;
     // public Text boardcountUI;
     // Start is called before the first frame update
     void Start()
@@ -24,12 +30,16 @@ public class Player : MonoBehaviour
         boardsc.text = $"boards: {boardcount}";
         currentHealth = maxHealth;
         healthBar.SetMaxHP(maxHealth);
+        SpiderCount = SpiderSpawner.GetSpiderCount();
+        TreeEntCount = TreeEntSpawner.SapwnAmount;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        SpiderCount = SpiderSpawner.GetSpiderCount();
+        TreeEntCount = TreeEntSpawner.SapwnAmount;
+        EnemyCount.text = $"Spiders: {SpiderCount}, TreeEnts: {TreeEntCount}";
     }
 
     public void TakeDamage(float damage)

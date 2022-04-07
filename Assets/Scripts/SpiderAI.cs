@@ -9,10 +9,13 @@ public class SpiderAI : MonoBehaviour
     public delegate void SpiderKilled();
     public static event SpiderKilled OnSpiderKilled;
 
+    public SpiderSpawner Spawner;
+
     public float lookRadius = 10f;
     public float roamTargetDistance = 3f;
     Vector3 roamPoint;
     bool RoamPointSet = false;
+    
     
 
     Transform target;
@@ -27,6 +30,7 @@ public class SpiderAI : MonoBehaviour
     private float health = 2f;
 
     private bool run = false;
+    private int count = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -35,7 +39,10 @@ public class SpiderAI : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
     }
 
-    
+    public float GetHealth()
+    {
+        return health;
+    }
 
     // Update is called once per frame
     void Update()
@@ -58,6 +65,7 @@ public class SpiderAI : MonoBehaviour
         }
         else
         {
+            count++;
             GoAway();
         }
     }
@@ -156,6 +164,7 @@ public class SpiderAI : MonoBehaviour
 
     void Die()
     {
+        Spawner.ReduceCount();
         Destroy(gameObject);
         if(OnSpiderKilled != null)
         {

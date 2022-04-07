@@ -16,6 +16,14 @@ public class SpiderSpawner : MonoBehaviour
     }*/
 
     //Listens to the spider being killed event
+    public int GetSpiderCount()
+    {
+        return CurrentSpiderCount;
+    }
+    public void ReduceCount()
+    {
+        CurrentSpiderCount--;
+    }
     private void OnEnable()
     {
         SpiderAI.OnSpiderKilled += SpawnSpider;

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 using UnityEngine;
 
 public class PlayerCombat : MonoBehaviour
@@ -17,16 +18,40 @@ public class PlayerCombat : MonoBehaviour
 
     public float knockbackTime;
 
-
+    public Text enemyhp;
+    public HealthBar healthBar;
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Space))
+        Collider[] spiders = Physics.OverlapSphere(Attackpoint.position, AttackRange, spiderlayer);
+        string line = "";
+        foreach (Collider c in spiders)
+        {
+            //Component spider = c.GetComponent<SpiderAI>();
+            line = line + $"{c.GetComponent<SpiderAI>().name} health: {c.GetComponent<SpiderAI>().GetHealth()} ";
+            healthBar.SetHealth(c.GetComponent<SpiderAI>().GetHealth());
+        }
+        
+        enemyhp.text = line;
+
+        Collider[] Ents = Physics.OverlapSphere(Attackpoint.position, AttackRange, EntLayer);
+        foreach (Collider c in Ents)
+        {
+            //Component spider = c.GetComponent<SpiderAI>();
+            line = line + $"{c.GetComponent<TreeEntAI>().name} health: {c.GetComponent<TreeEntAI>().GetHealth()} ";
+            healthBar.SetHealth(c.GetComponent<TreeEntAI>().GetHealth());
+        }
+        if (Ents.Length <= 0 && spiders.Length <= 0)
+            healthBar.SetHealth(0);
+        enemyhp.text = line;
+
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             if (Time.time > NextAttackTime)
             {
                 Attack();
                 NextAttackTime = Time.time + AttackCooldownTime;
+
             }
         }
     }

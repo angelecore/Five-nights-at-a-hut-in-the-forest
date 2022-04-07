@@ -33,6 +33,11 @@ public class TreeEntAI : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
     }
 
+    public float GetHealth()
+    {
+        return health;
+    }
+
     // Update is called once per frame
     void Update()
     {
