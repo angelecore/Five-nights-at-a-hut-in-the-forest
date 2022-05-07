@@ -138,8 +138,8 @@ public class SpiderAI : MonoBehaviour
 
     void AttackPlayer()
     {
-        
-        transform.LookAt(target);
+
+        FaceTarget();
 
         //---enemy attacks---
         if(Time.time > NextAttackTime)
@@ -177,6 +177,11 @@ public class SpiderAI : MonoBehaviour
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, lookRadius);
     }
+    void FaceTarget()
+    {
+        Vector3 direction = (target.position - transform.position).normalized;
+        Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
+        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f);
+    }
 
-    
 }
