@@ -10,7 +10,7 @@ public class Player : MonoBehaviour
     public int boardcount = 10;
     public Text ui;
     public Text boardsc;
-    public Text gameoverscreen;
+    public CanvasController gameStateController;
     public playerMovement move;
 
     public SpiderSpawner SpiderSpawner;
@@ -55,8 +55,9 @@ public class Player : MonoBehaviour
     public void StopGame()
     {
         move.enabled = false;
-        gameoverscreen.text = $" Game over ";
-
+        Cursor.lockState = CursorLockMode.Confined;
+        Cursor.visible = true;
+        gameStateController.ShowGameOverMenu();
     }
     void OnTriggerEnter(Collider collide)
     {
