@@ -29,6 +29,9 @@ public class TreeEntAI : MonoBehaviour
     private bool stun = false;
 
     public bool attack = false;
+
+    public Player player;
+    private float DamageValue = 1f;
     // Start is called before the first frame update
     void Start()
     {
@@ -88,9 +91,14 @@ public class TreeEntAI : MonoBehaviour
                         {
                             attack = true;
                             attackTimer = 4;
+                            if(currentTarget == targetPlayer)
+                            {
+                                player.TakeDamage(DamageValue);
+                            }
                         }
 
                     }
+
                 }
                 else if (!ActivationInitiated)
                 {
