@@ -10,9 +10,15 @@ public class barricadeScript : MonoBehaviour
     public GameObject[] board;
     public Player player;
     public int hp =  0;
+    public AudioClip repairSound;
+    public AudioClip hitSound;
+    AudioSource audioSource;
+
+
     // Start is called before the first frame update
     void Start()
     {
+        audioSource = GetComponent<AudioSource>();
         boardAnimation = GetComponentsInChildren<Animator>();
         board[0].SetActive(false);
         board[1].SetActive(false);
@@ -22,7 +28,7 @@ public class barricadeScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(boards != prev)
+        if (boards != prev)
         {
             prev = boards;
             switch (boards)
@@ -37,17 +43,22 @@ public class barricadeScript : MonoBehaviour
                     boardAnimation[2].Play("board3Animation");
                     return;
             }
-        }    
+        }
+       
+
     }
     void addBarricade()
     {
-        if(boards < 3 && player.boardchech())
+        if (boards < 3 && player.boardchech())
         {
             board[boards].SetActive(true);
             boards += 1;
             hp += 6;
-            player.removebaricadecount();
+            player.removebaricadecount();   
+            StartCoroutine(playBarricadeSound());
+                 
         }
+ 
     }
     void removeBarricade()
     {
@@ -77,6 +88,12 @@ public class barricadeScript : MonoBehaviour
                 }
             }
 
-        }
+        }   
+    }
+    IEnumerator playBarricadeSound()
+    {
+        audioSource.PlayOneShot(repairSound, 0.3f);
+        yield return new WaitForSeconds(0.9f);
+        audioSource.PlayOneShot(hitSound, 0.5f);
     }
 }
