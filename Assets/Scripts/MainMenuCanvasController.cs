@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MainMenuCanvasController : MonoBehaviour
 {
@@ -9,6 +10,15 @@ public class MainMenuCanvasController : MonoBehaviour
 
     [SerializeField]
     private RectTransform optionsMenu;
+
+    [SerializeField]
+    private Slider musicVolumeSlider;
+
+    [SerializeField]
+    private Slider effectsVolumeSlider;
+
+    [SerializeField]
+    private MixerController mixerController;
 
     private static void Show(Component component)
     {
@@ -24,6 +34,7 @@ public class MainMenuCanvasController : MonoBehaviour
     void Start()
     {
         ShowMainMenu();
+        UpdateSliders();
     }
 
     public void StartGame()
@@ -46,5 +57,21 @@ public class MainMenuCanvasController : MonoBehaviour
     {
         Hide(mainMenu);
         Show(optionsMenu);
+    }
+
+    public void SetEffectsVolumeFromSlider()
+    {
+        mixerController.SetEffectsVolume(effectsVolumeSlider.value);
+    }
+
+    public void SetMusicVolumeFromSlider()
+    {
+        mixerController.SetMusicVolume(musicVolumeSlider.value);
+    }
+
+    private void UpdateSliders()
+    {
+        musicVolumeSlider.SetValueWithoutNotify(mixerController.MusicVolume);
+        effectsVolumeSlider.SetValueWithoutNotify(mixerController.EffectsVolume);
     }
 }
