@@ -21,6 +21,8 @@ public class PlayerCombat : MonoBehaviour
     public Text enemyhp;
     public HealthBar healthBar;
     // Update is called once per frame
+
+    public AudioSource misssound;
     void Update()
     {
         Collider[] spiders = Physics.OverlapSphere(Attackpoint.position, AttackRange, spiderlayer);
@@ -81,6 +83,8 @@ public class PlayerCombat : MonoBehaviour
                 c.GetComponent<TreeEntAI>().TakeDamage(1); 
             }
         }
+        if (Ents.Length <= 0 && spiders.Length <= 0)
+            misssound.Play();
     }
 
     /*public void knock_back()

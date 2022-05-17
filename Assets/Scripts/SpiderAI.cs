@@ -22,6 +22,7 @@ public class SpiderAI : MonoBehaviour
     NavMeshAgent agent;
 
     public Player player;
+    Animator animator;
 
     private float AttackCooldownTime = 2;
     private float NextAttackTime = 0;
@@ -37,6 +38,7 @@ public class SpiderAI : MonoBehaviour
     {
         target = GameObject.Find("Player").transform;
         agent = GetComponent<NavMeshAgent>();
+        animator = GetComponentInChildren<Animator>();
     }
 
     public float GetHealth()
@@ -47,6 +49,8 @@ public class SpiderAI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        float Speed = agent.velocity.magnitude / agent.speed;
+        animator.SetFloat("Speed", Speed, .1f, Time.deltaTime);
         float distanceToPlayer = Vector3.Distance(target.position, transform.position);
         if (!run)
         {

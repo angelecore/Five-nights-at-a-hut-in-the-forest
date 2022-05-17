@@ -33,6 +33,7 @@ public class TreeEntAI : MonoBehaviour
     public Player player;
     private float DamageValue = 1f;
     // Start is called before the first frame update
+
     void Start()
     {
         //target - the child object for AI to move to
