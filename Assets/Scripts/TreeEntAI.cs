@@ -34,6 +34,7 @@ public class TreeEntAI : MonoBehaviour
     private float DamageValue = 1f;
     // Start is called before the first frame update
 
+    AudioSource damaged;
     void Start()
     {
         //target - the child object for AI to move to
@@ -41,6 +42,7 @@ public class TreeEntAI : MonoBehaviour
         targetPlayer = GameObject.Find("Player").transform;
         currentTarget = targetWindow;
         agent = GetComponent<NavMeshAgent>();
+        damaged = GetComponentInChildren<AudioSource>();
     }
 
     public float GetHealth()
@@ -142,6 +144,7 @@ public class TreeEntAI : MonoBehaviour
     public void TakeDamage(int damage)
     {
         health -= damage;
+        damaged.Play();
         if (health <= 0)
         {
             stun = true;
