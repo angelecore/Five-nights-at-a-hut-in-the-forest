@@ -23,6 +23,12 @@ public class Player : MonoBehaviour
     private int TreeEntCount;
 
     public Text EnemyCount;
+    int currentscore=0;
+    int spiderkillscore = 100;
+    int treeendstunscore = 200;
+    public Text currentscorefield;
+
+    int highscore => PlayerPrefs.GetInt("Highscore", 1);
     // public Text boardcountUI;
     // Start is called before the first frame update
     void Start()
@@ -32,6 +38,7 @@ public class Player : MonoBehaviour
         healthBar.SetMaxHP(maxHealth);
         SpiderCount = SpiderSpawner.GetSpiderCount();
         TreeEntCount = TreeEntSpawner.SapwnAmount;
+        currentscore = 0;
     }
 
     // Update is called once per frame
@@ -42,14 +49,28 @@ public class Player : MonoBehaviour
         EnemyCount.text = $"Spiders: {SpiderCount}, TreeEnts: {TreeEntCount}";
     }
 
+    public void spideronkill()
+    {
+        currentscore += spiderkillscore;
+        currentscorefield.text = $"current score: {currentscore}";
+    }
+    public void Entonkill()
+    {
+        currentscore += treeendstunscore;
+        currentscorefield.text = $"current score: {currentscore}";
+    }
+
     public void TakeDamage(float damage)
     {
         currentHealth -= damage;
 
         healthBar.SetHealth(currentHealth);
         if(currentHealth <= 0)
-        {
+        {   
+            if(currentscore >= highscore)
+                PlayerPrefs.SetInt("Highscore", currentscore);
             StopGame();
+            currentHealth = 999999;
         }
     }
     public void StopGame()

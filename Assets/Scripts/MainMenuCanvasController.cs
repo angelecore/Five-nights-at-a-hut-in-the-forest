@@ -20,8 +20,12 @@ public class MainMenuCanvasController : MonoBehaviour
     [SerializeField]
     private MixerController mixerController;
 
+    public Text Highscorefield;
+
+    int highscore => PlayerPrefs.GetInt("Highscore", 1);
+
     private static void Show(Component component)
-    {
+    {   
         component.gameObject.SetActive(true);
     }
 
@@ -49,6 +53,7 @@ public class MainMenuCanvasController : MonoBehaviour
 
     public void ShowMainMenu()
     {
+        Highscorefield.text = $"Current HighScore: {highscore}";
         Show(mainMenu);
         Hide(optionsMenu);
     }

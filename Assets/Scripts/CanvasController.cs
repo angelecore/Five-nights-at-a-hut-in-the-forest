@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 using UnityEngine;
 
 public class CanvasController : MonoBehaviour
@@ -10,6 +11,11 @@ public class CanvasController : MonoBehaviour
 
     [SerializeField]
     private RectTransform gameOverMenu;
+
+    int highscore => PlayerPrefs.GetInt("Highscore", 0);
+    int Oldhighscore => PlayerPrefs.GetInt("CurrentHighscore", 1);
+
+    public Text HighScore;
 
     void Start()
     {
@@ -33,6 +39,15 @@ public class CanvasController : MonoBehaviour
     public void ShowGameOverMenu()
     {
         Hide(pausedMenu);
+        
+        if (Oldhighscore >= highscore)
+            HighScore.text = $"HighScore : {highscore}";
+        else
+        {
+            PlayerPrefs.SetInt("CurrentHighscore", highscore);
+            HighScore.text = $"New HighScore: {highscore}";
+        }
+            
         Show(gameOverMenu);
     }
 

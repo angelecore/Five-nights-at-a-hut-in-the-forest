@@ -79,6 +79,7 @@ public class SpiderAI : MonoBehaviour
         health -= damage;
         if (health <= 0)
         {
+            player.spideronkill();
             Die();
         }
         else 

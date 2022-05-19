@@ -148,6 +148,7 @@ public class TreeEntAI : MonoBehaviour
         if (health <= 0)
         {
             stun = true;
+            player.Entonkill();
             StartCoroutine(Stun());
         }
     }
